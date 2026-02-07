@@ -1,0 +1,94 @@
+// ==================================================
+// HERO SECTIONS - CROTASTY
+// ==================================================
+
+.hero {
+  text-align: center;
+  padding: 60px 40px 90px;
+  position: relative;
+  overflow: hidden;
+  @include fade-in;
+  
+  h1 {
+    font-family: $ff-serif;
+    font-size: $fs-hero;
+    color: $accent;
+    font-weight: 400;
+    margin: 0 0 80px;
+    text-align: center;
+    @include slide-up;
+  }
+  
+  p {
+    font-family: $ff-sans;
+    max-width: 620px;
+    margin: 50px auto 30px;
+    font-size: 18px;
+    animation: fadeIn 0.8s ease-in 0.2s both;
+  }
+  
+  button {
+    @extend %button-base;
+    padding: 18px 38px;
+    background: $accent;
+    color: $white;
+    animation: fadeIn 1s ease-in 0.4s both;
+  }
+}
+
+// H3 uniforme en todas las páginas
+h3 {
+  font-family: $ff-serif;
+  font-size: $fs-h3;
+  font-weight: 400;
+  color: $brand-ochre;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+// TEXTOS GIGANTES DE FONDO
+.bg-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: $ff-serif;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+  display: block;
+}
+
+.hero .bg-text {
+  top: 30%;
+  font-size: 520px;
+}
+
+.platos .bg-text {
+  top: 54%;
+  font-size: 320px;
+}
+
+.tips .bg-text,
+.contacto .bg-text {
+  top: 36%;
+  font-size: 420px;
+}
+
+// BANNER
+.banner {
+  margin-top: -10px;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    display: block;
+    @include transition(transform, $transition-slow);
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
