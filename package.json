@@ -1,0 +1,22 @@
+{
+  "name": "crotasty",
+  "version": "1.0.0",
+  "description": "CROTASTY - Cooking website with SCSS",
+  "main": "index.html",
+  "scripts": {
+    "sass": "sass styles/scss/style.scss styles/style.css --no-source-map",
+    "sass:watch": "sass --watch styles/scss/style.scss styles/style.css --no-source-map",
+    "sass:build": "sass styles/scss/style.scss styles/style.css --style compressed --no-source-map"
+  },
+  "keywords": [
+    "cooking",
+    "recipes",
+    "scss",
+    "bootstrap"
+  ],
+  "author": "CRO",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.70.0"
+  }
+}

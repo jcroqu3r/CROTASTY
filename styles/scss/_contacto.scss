@@ -1,0 +1,210 @@
+// ==================================================
+// CONTACTO PAGE - CROTASTY
+// ==================================================
+
+.contacto {
+  position: relative;
+  overflow: hidden;
+}
+
+.contacto-hero {
+  text-align: center;
+  padding: 60px 40px 120px;
+  @include fade-in;
+  
+  h1 {
+    font-family: $ff-serif;
+    font-size: $fs-hero;
+    font-weight: 400;
+    color: $accent;
+    margin: 0 0 20px;
+    @include slide-up;
+  }
+  
+  h2 {
+    font-family: $ff-serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: $brand-ochre;
+    margin: 0;
+    animation: fadeIn 0.8s ease-in 0.2s both;
+  }
+}
+
+.contacto-wrapper {
+  padding: 60px 40px;
+  background: transparent;
+}
+
+.contacto-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+// Información de contacto
+.contacto-info {
+  @include flex-column;
+  gap: 40px;
+  
+  .info-block {
+    text-align: left;
+    animation: slideInLeft 0.6s ease-out both;
+    
+    &:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+    
+    h3 {
+      font-family: $ff-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: $brand-ochre;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      text-align: left;
+      @include transition(color);
+      
+      &:hover {
+        color: $accent;
+      }
+    }
+    
+    p {
+      font-family: $ff-sans;
+      font-size: $fs-body-large;
+      color: $text-dark;
+      line-height: 1.6;
+      text-align: left;
+      
+      a {
+        color: $brand-ochre;
+        text-decoration: none;
+        @include transition(color);
+        display: inline-block;
+        margin-bottom: 4px;
+        
+        &:hover {
+          color: $accent;
+        }
+      }
+    }
+  }
+}
+
+// Formulario
+.contacto-form-wrapper {
+  background: $white;
+  padding: 40px;
+  border-radius: $radius-small;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  animation: slideInRight 0.6s ease-out both;
+  @include transition(box-shadow);
+  
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.contacto-form-title {
+  font-family: $ff-serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: $brand-ochre;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.contacto-form {
+  @include flex-column;
+  gap: 24px;
+}
+
+.form-group {
+  @include flex-column;
+  
+  label {
+    font-family: $ff-sans;
+    font-size: 12px;
+    font-weight: 500;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  
+  input,
+  textarea {
+    padding: 12px 16px;
+    border: 1px solid $line;
+    border-radius: 4px;
+    font-family: $ff-sans;
+    font-size: $fs-body;
+    color: $text-dark;
+    background: #fafafa;
+    @include transition(all);
+    
+    &:focus {
+      outline: none;
+      border-color: $brand-ochre;
+      background: $white;
+      transform: translateY(-1px);
+    }
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+.contacto-submit {
+  @extend %button-base;
+  padding: 14px 32px;
+  background: $brand-ochre;
+  color: $white;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 16px;
+  
+  &:hover {
+    background: darken($brand-ochre, 10%);
+  }
+}
+
+.contacto-banner {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 80px;
+  
+  .bg-text {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 280px;
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    @include transition(transform, $transition-slow);
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}

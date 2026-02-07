@@ -1,0 +1,95 @@
+// ==================================================
+// MIXINS - CROTASTY
+// Reusable functions and patterns
+// ==================================================
+
+// Flexbox Center
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Flex Column
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Responsive Breakpoints
+@mixin mobile {
+  @media (max-width: $bp-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $bp-tablet) {
+    @content;
+  }
+}
+
+@mixin tablet-large {
+  @media (max-width: $bp-tablet-large) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: $bp-desktop) {
+    @content;
+  }
+}
+
+// Smooth Transitions
+@mixin transition($properties: all, $duration: $transition-normal) {
+  transition: $properties $duration;
+}
+
+// Hover Effect Scale
+@mixin hover-scale($scale: 1.05) {
+  @include transition(transform);
+  
+  &:hover {
+    transform: scale($scale);
+  }
+}
+
+// Button Base
+@mixin button-base {
+  padding: 12px 24px;
+  border: none;
+  border-radius: $radius-small;
+  font-family: $ff-sans;
+  font-size: $fs-body;
+  cursor: pointer;
+  @include transition(all);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Fade In Animation
+@mixin fade-in($duration: $transition-slow) {
+  animation: fadeIn $duration ease-in;
+}
+
+// Slide Up Animation
+@mixin slide-up($duration: $transition-slow) {
+  animation: slideUp $duration ease-out;
+}
+
+// Image Hover Effect
+@mixin image-hover {
+  overflow: hidden;
+  
+  img {
+    @include transition(transform);
+    
+    &:hover {
+      transform: scale(1.08);
+    }
+  }
+}

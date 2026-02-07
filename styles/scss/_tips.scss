@@ -1,0 +1,152 @@
+// ==================================================
+// TIPS PAGE - CROTASTY
+// ==================================================
+
+.tips {
+  position: relative;
+  overflow: hidden;
+}
+
+.tips-hero {
+  text-align: center;
+  padding: 60px 40px 120px;
+  @include fade-in;
+  
+  h1 {
+    @include slide-up;
+  }
+  
+  h2 {
+    animation: fadeIn 0.8s ease-in 0.2s both;
+  }
+}
+
+.tips-lista {
+  width: 70%;
+  max-width: 1000px;
+  margin: 0 auto;
+  @include flex-column;
+  gap: 3rem;
+}
+
+.tip {
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr 120px;
+  align-items: start;
+  gap: 1.5rem;
+  animation: slideInLeft 0.6s ease-out both;
+  
+  &:nth-child(even) {
+    animation-name: slideInRight;
+  }
+}
+
+.tip-numero {
+  font-size: 36px;
+  font-weight: 400;
+  color: $brand-ochre;
+  grid-column: 1;
+  @include transition(transform);
+  
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.tip-titulo {
+  grid-column: 2;
+  font-size: 48px;
+  font-weight: 400;
+  color: $brand-ochre;
+  
+  h2 {
+    font-weight: 400;
+    @include transition(color);
+    
+    &:hover {
+      color: $accent;
+    }
+  }
+}
+
+.tip-contenido {
+  grid-column: 3;
+  font-family: $ff-sans;
+  font-size: $fs-body;
+  color: $text-dark;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.tip-boton {
+  grid-column: 4;
+  display: flex;
+  align-items: center;
+  
+  button {
+    font-size: 16px;
+    padding: 8px 18px;
+    background: none;
+    border: 1px solid $brand-ochre;
+    color: $brand-ochre;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: $ff-sans;
+    @include transition(all);
+    
+    &:hover {
+      background: $brand-ochre;
+      color: $white;
+      transform: scale(1.05);
+    }
+  }
+}
+
+// Responsive
+@include desktop {
+  .tips-lista {
+    width: 85%;
+    max-width: 95vw;
+  }
+  
+  .tip {
+    grid-template-columns: 40px 1fr 1fr 80px;
+    gap: 1rem;
+  }
+}
+
+@include tablet {
+  .tips-lista {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    gap: 5rem;
+  }
+  
+  .tip {
+    @include flex-column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .tip-numero {
+    display: none;
+  }
+  
+  .tip-titulo {
+    font-size: 22px;
+  }
+  
+  .tip-contenido {
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .tip-boton {
+    @include flex-center;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
