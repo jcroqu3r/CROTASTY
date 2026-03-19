@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Contacto - Crotasty</title>
+	<link rel="preload" href="fonts/PPEditorialOld-Ultralight.woff2" as="font" type="font/woff2" crossorigin />
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<div class="page-intro" aria-hidden="true">
+		<div class="page-intro__logo-mask">
+			<img src="img/logo-crotasty.png" alt="" />
+		</div>
+	</div>
+
+	<header class="top-header">
+		<div class="top-header__inner">
+			<button class="icon-btn" type="button" aria-label="Buscar">
+				<img src="img/buscar.png" alt="" />
+			</button>
+
+			<a class="brand" href="index.html" aria-label="Inicio Crotasty">
+				<img src="img/logo-crotasty.png" alt="Crotasty" />
+			</a>
+
+			<span class="top-header__line" aria-hidden="true"></span>
+
+			<nav class="top-nav" aria-label="Navegación principal">
+				<a href="recetas.html">Recetas</a>
+				<a href="tips.html">Tips</a>
+				<a href="contacto.html">Contacto</a>
+			</nav>
+
+			<div class="top-social">
+				<a href="#" aria-label="WhatsApp">
+					<img src="img/wa.png" alt="" />
+				</a>
+				<a href="https://www.instagram.com/crotasty/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+					<img src="img/ig.png" alt="" />
+				</a>
+			</div>
+		</div>
+	</header>
+	<div class="page-curtain" aria-hidden="true"></div>
+	<div class="cursor-dot" aria-hidden="true"></div>
+	<div class="cursor-ring" aria-hidden="true"></div>
+	<script src="scroll-smooth.js"></script>
+
+	<script>
+		(function () {
+			const headings = document.querySelectorAll("h1, .contact-row__value");
+
+			if (!headings.length) {
+				return;
+			}
+
+			const createLettersFragment = (text) => {
+				const fragment = document.createDocumentFragment();
+
+				for (const char of text) {
+					if (char === "\n" || char === "\r" || char === "\t") {
+						continue;
+					}
+
+					const letter = document.createElement("span");
+					letter.className = "h1-letter";
+					letter.textContent = char === " " ? "\u00A0" : char;
+					fragment.appendChild(letter);
+				}
+
+				return fragment;
+			};
+
+			const wrapLettersRecursively = (node) => {
+				if (node.nodeType === Node.TEXT_NODE) {
+					const parent = node.parentElement;
+
+					if (parent && parent.classList.contains("h1-letter")) {
+						return;
+					}
+
+					node.replaceWith(createLettersFragment(node.textContent || ""));
+					return;
+				}
+
+				if (node.nodeType !== Node.ELEMENT_NODE) {
+					return;
+				}
+
+				if (node.classList.contains("h1-letter")) {
+					return;
+				}
+
+				Array.from(node.childNodes).forEach(wrapLettersRecursively);
+			};
+
+			headings.forEach((heading) => {
+				if (heading.dataset.lettersReady === "true") {
+					return;
+				}
+
+				wrapLettersRecursively(heading);
+				heading.dataset.lettersReady = "true";
+			});
+		})();
+
+		(function () {
+			const curtain = document.querySelector(".page-curtain");
+
+			if (!curtain) {
+				return;
+			}
+
+			const transitionDuration = 700;
+			let isNavigating = false;
+
+			const isInternalNavigableLink = (anchor) => {
+				const rawHref = anchor.getAttribute("href");
+
+				if (!rawHref || rawHref.startsWith("#") || rawHref.startsWith("mailto:") || rawHref.startsWith("tel:") || rawHref.startsWith("javascript:")) {
+					return false;
+				}
+
+				if (anchor.target === "_blank" || anchor.hasAttribute("download")) {
+					return false;
+				}
+
+				const targetUrl = new URL(anchor.href, window.location.href);
+
+				if (targetUrl.origin !== window.location.origin) {
+					return false;
+				}
+
+				return targetUrl.href !== window.location.href;
+			};
+
+			document.addEventListener("click", (event) => {
+				if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+					return;
+				}
+
+				const anchor = event.target.closest("a");
+
+				if (!anchor || !isInternalNavigableLink(anchor)) {
+					return;
+				}
+
+				if (isNavigating) {
+					event.preventDefault();
+					return;
+				}
+
+				event.preventDefault();
+				isNavigating = true;
+
+				const targetHref = anchor.href;
+				curtain.classList.add("is-active");
+
+				window.setTimeout(() => {
+					window.location.href = targetHref;
+				}, transitionDuration);
+			});
+		})();
+
+		(function () {
+			const dot = document.querySelector('.cursor-dot');
+			const ring = document.querySelector('.cursor-ring');
+			if (!dot || !ring) return;
+
+			let mouseX = window.innerWidth / 2;
+			let mouseY = window.innerHeight / 2;
+			let ringX = mouseX;
+			let ringY = mouseY;
+			const lerp = 0.12;
+
+			document.addEventListener('mousemove', function (e) {
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+				dot.style.left = mouseX + 'px';
+				dot.style.top = mouseY + 'px';
+			});
+
+			document.addEventListener('mouseleave', function () {
+				dot.style.opacity = '0';
+				ring.style.opacity = '0';
+			});
+
+			document.addEventListener('mouseenter', function () {
+				dot.style.opacity = '';
+				ring.style.opacity = '';
+			});
+
+			const hoverTargets = 'a, button, [role="button"], input, label, select, textarea';
+
+			document.addEventListener('mouseover', function (e) {
+				if (e.target.closest(hoverTargets)) {
+					dot.classList.add('is-hovering');
+					ring.classList.add('is-hovering');
+				}
+			});
+
+			document.addEventListener('mouseout', function (e) {
+				if (e.target.closest(hoverTargets)) {
+					dot.classList.remove('is-hovering');
+					ring.classList.remove('is-hovering');
+				}
+			});
+
+			function animateRing() {
+				ringX += (mouseX - ringX) * lerp;
+				ringY += (mouseY - ringY) * lerp;
+				ring.style.left = ringX + 'px';
+				ring.style.top = ringY + 'px';
+				requestAnimationFrame(animateRing);
+			}
+
+			animateRing();
+		})();
+	</script>
+</body>
+</html>
