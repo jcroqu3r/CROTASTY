@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Crotasty | Por Qué El Romero Combina Tan Bien Con El Cerdo</title>
+	<link rel="preload" href="fonts/PPEditorialOld-Ultralight.woff2" as="font" type="font/woff2" crossorigin />
+	<!-- Carga robusta de DM Sans -->
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;700;900&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<div class="page-intro" aria-hidden="true">
+		<div class="page-intro__logo-mask">
+			<img src="img/logo-crotasty.png" alt="" />
+		</div>
+	</div>
+
+	<header class="top-header">
+		<div class="top-header__inner">
+			<button class="icon-btn" type="button" aria-label="Buscar">
+				<img src="img/buscar.png" alt="" />
+			</button>
+
+			<a class="brand" href="index.html" aria-label="Inicio Crotasty">
+				<img src="img/logo-crotasty.png" alt="Crotasty" />
+			</a>
+
+			<span class="top-header__line" aria-hidden="true"></span>
+
+			<nav class="top-nav" aria-label="Navegación principal">
+				<a href="recetas.html">Recetas</a>
+				<a href="tips.html">Tips</a>
+				<a href="contacto.html">Contacto</a>
+			</nav>
+
+			<div class="top-social">
+				<a href="#" aria-label="WhatsApp">
+					<img src="img/wa.png" alt="" />
+				</a>
+				<a href="https://www.instagram.com/crotasty/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+					<img src="img/ig.png" alt="" />
+				</a>
+			</div>
+		</div>
+	</header>
+
+	<section class="recipes-hero" aria-label="Encabezado de tips">
+		<div class="recipes-hero__inner">
+			<h1 class="recipes-hero__animated-title editorial-hover-safe">
+				<span class="recipes-hero__line">
+					<span class="recipes-hero__line-inner" style="--hero-line-delay: 260ms;">POR QUÉ EL ROMERO COMBINA</span>
+				</span>
+				<span class="recipes-hero__line">
+					<span class="recipes-hero__line-inner" style="--hero-line-delay: 420ms;">TAN BIEN CON EL CERDO</span>
+				</span>
+			</h1>
+		</div>
+		<div class="recipes-hero__divider" aria-hidden="true"></div>
+
+	</section>
+
+
+
+	<section class="home-quote" aria-label="Frase destacada">
+		<div class="home-quote__inner">
+			<span class="home-quote__quote-mark home-quote__quote-mark--left" aria-hidden="true">&#8220;</span>
+			<p class="home-quote__animated-text">
+				<span class="home-quote__text-line">
+					<span class="home-quote__text-line-inner" style="--hero-line-delay: 120ms;">EL ROMERO ES UNA DE LAS HIERBAS</span>
+				</span>
+				<span class="home-quote__text-line">
+					<span class="home-quote__text-line-inner" style="--hero-line-delay: 220ms;">QUE MEJOR RESALTA EL SABOR</span>
+				</span>
+				<span class="home-quote__text-line">
+					<span class="home-quote__text-line-inner" style="--hero-line-delay: 320ms;">NATURAL DEL CERDO.</span>
+				</span>
+			</p>
+		</div>
+	</section>
+
+	<section class="hero-banner" aria-label="Imagen destacada tip">
+		<div class="hero-banner__inner hero-banner__inner--entry">
+			<img src="img/header-tip-1.png" alt="Tip destacado" />
+		</div>
+	</section>
+
+
+	</section>
+
+	<div class="cursor-dot" aria-hidden="true"></div>
+	<div class="cursor-ring" aria-hidden="true"></div>
+
+		<script>
+			(function () {
+				const headings = document.querySelectorAll("h1, .contact-row__value, .tip-card h2");
+
+				if (!headings.length) {
+					return;
+				}
+
+				const createLettersFragment = (text) => {
+					const fragment = document.createDocumentFragment();
+
+					const tokens = text.replace(/[\n\r\t]+/g, " ").split(/(\s+)/);
+
+					tokens.forEach((token) => {
+						if (!token) {
+							return;
+						}
+
+						if (/^\s+$/.test(token)) {
+							fragment.appendChild(document.createTextNode(" "));
+							return;
+						}
+
+						const word = document.createElement("span");
+						word.className = "h1-word";
+
+						for (const char of token) {
+							const letter = document.createElement("span");
+							letter.className = "h1-letter";
+							letter.textContent = char;
+							word.appendChild(letter);
+						}
+
+						fragment.appendChild(word);
+					});
+
+					return fragment;
+				};
+
+				const wrapLettersRecursively = (node) => {
+					if (node.nodeType === Node.TEXT_NODE) {
+						const parent = node.parentElement;
+
+						if (parent && (parent.classList.contains("h1-letter") || parent.classList.contains("h1-word"))) {
+							return;
+						}
+
+						node.replaceWith(createLettersFragment(node.textContent || ""));
+						return;
+					}
+
+					if (node.nodeType !== Node.ELEMENT_NODE) {
+						return;
+					}
+
+					if (node.classList.contains("h1-letter") || node.classList.contains("h1-word")) {
+						return;
+					}
+
+					Array.from(node.childNodes).forEach(wrapLettersRecursively);
+				};
+
+				headings.forEach((heading) => {
+					if (heading.dataset.lettersReady === "true") {
+						return;
+					}
+
+					wrapLettersRecursively(heading);
+					heading.dataset.lettersReady = "true";
+				});
+			})();
+
+			document.addEventListener('DOMContentLoaded', function () {
+				setTimeout(() => {
+					document.body.classList.add('page-entered');
+				}, 1600);
+			});
+		</script>
+
+
+
+		<script>
+			(function () {
+				const quoteSection = document.querySelector(".home-quote");
+				if (!quoteSection) return;
+
+				const reveal = () => {
+					quoteSection.classList.add("home-quote--visible");
+				};
+
+				const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+				if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+					reveal();
+					return;
+				}
+
+				const observer = new IntersectionObserver((entries, currentObserver) => {
+					entries.forEach((entry) => {
+						if (!entry.isIntersecting) return;
+						reveal();
+						currentObserver.unobserve(entry.target);
+					});
+				}, {
+					threshold: 0.28,
+					rootMargin: "0px 0px -12% 0px"
+				});
+
+				observer.observe(quoteSection);
+			})();
+		</script>
+
+		<script>
+			(function () {
+				const dot = document.querySelector('.cursor-dot');
+				const ring = document.querySelector('.cursor-ring');
+				if (!dot || !ring) return;
+
+				let mouseX = window.innerWidth / 2;
+				let mouseY = window.innerHeight / 2;
+				let ringX = mouseX;
+				let ringY = mouseY;
+				const lerp = 0.12;
+
+				document.addEventListener('mousemove', function (e) {
+					mouseX = e.clientX;
+					mouseY = e.clientY;
+					dot.style.left = mouseX + 'px';
+					dot.style.top = mouseY + 'px';
+				});
+
+				document.addEventListener('mouseleave', function () {
+					dot.style.opacity = '0';
+					ring.style.opacity = '0';
+				});
+
+				document.addEventListener('mouseenter', function () {
+					dot.style.opacity = '';
+					ring.style.opacity = '';
+				});
+
+				const hoverTargets = 'a, button, [role="button"], input, label, select, textarea';
+
+				document.addEventListener('mouseover', function (e) {
+					if (e.target.closest(hoverTargets)) {
+						dot.classList.add('is-hovering');
+						ring.classList.add('is-hovering');
+					}
+				});
+
+				document.addEventListener('mouseout', function (e) {
+					if (e.target.closest(hoverTargets)) {
+						dot.classList.remove('is-hovering');
+						ring.classList.remove('is-hovering');
+					}
+				});
+
+				function animateRing() {
+					ringX += (mouseX - ringX) * lerp;
+					ringY += (mouseY - ringY) * lerp;
+					ring.style.left = ringX + 'px';
+					ring.style.top = ringY + 'px';
+					requestAnimationFrame(animateRing);
+				}
+
+				animateRing();
+			})();
+		</script>
+</body>
+</html>
